@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Gallery</title>
+    <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+    <!-- Using via Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- https://tailwindcss.com/docs/installation -->
+    <!-- Using Tailwind via CDN -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+    <!-- Vue CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app" class="flex flex-col items-center ">
+        <p>Photo Gallery ({{ countTotal }})</p>
+        <p>Like Count ({{ countShow }}) </p>
+        <photo-search @search-text="(text) => {this.searchText = text}"></photo-search>
+        <div v-if="search.length !=0" v-for="(picture,index) in search">
+            <photo-item :pictures="picture" :index="index" @show-fav="showFavIcon" @toggle-modal="toggleModal"></photo-item>
+            <photo-view :pictures="picture" :index="index" @toggle-modalview="toggleModal"></photo-view>
+        </div>
+        <p v-else>No Photo</p>
+    </div>
+
+    <!-- my main.js -->
+    <script src="./main.js"></script>
+    <script src="./components//PhotoItem.js"></script>
+    <script src="./components/PhotoSearch.js"></script>
+    <script src="./components/PhotoView.js"></script>
+    <script>
+        const mountedApp = app.mount('#app')
+      </script>
+</body>
+<style>
+    .material-icons.orange { color: #FB8C00; }
+</style>
+</html>
